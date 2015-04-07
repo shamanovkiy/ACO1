@@ -2,27 +2,21 @@ package homework1;
 
 
 public class Address {
-    private String country;
     private String city;
     private String street;
     private String building;
 
-
-    public String getCountry() {
-        return country;
+    public Address(){
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public Address(String city, String street){
+        this.city = city;
+        this.street = street;
     }
 
     @Override
     public String toString() {
-        return "Address: " +
-                "country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", building='" + building + '\'';
+        return String.format("%s, %s, %s", city, street, building);
     }
 
     public String getCity() {

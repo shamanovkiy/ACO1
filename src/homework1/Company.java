@@ -73,8 +73,7 @@ public class Company {
 
     public void showInfo() {
         System.out.println(name + " Company, " +
-                address.getStreet() + " " + address.getBuilding() + ", " + address.getCity() + ", " +
-                address.getCountry());
+                address.getStreet() + " " + address.getBuilding() + ", " + address.getCity());
     }
 
     public boolean fireEmployee(int id) {

@@ -7,8 +7,9 @@ public class Client {
     private Equipment equipment;
 
 
-    public Client(String name){
+    public Client(String name, Equipment equipment){
         this.name = name;
+        this.equipment = equipment;
     }
 
     public void takeEquipment(Equipment equipment){

@@ -23,17 +23,20 @@ public class Director extends EmployeeSC {
         serviceCenter.addEmployee(employeeSC);
     }
 
-    public void fireEmployee(EmployeeSC employeeSC){
-        serviceCenter.fireEmployee(employeeSC);
+    public void fireEmployee(String name){
+        serviceCenter.fireEmployee(name);
     }
 
     public void showEmployees(){
         serviceCenter.showEmployees();
     }
 
-    public boolean payTax(int tax){
-        if(serviceCenter.getIncome() >= tax) {
-            serviceCenter.setIncome(serviceCenter.getIncome() - tax);
+    public boolean payTax(double tax){
+        if(tax < 0 || tax > 100){
+            return false;
+        }
+        if(serviceCenter.getIncome() >= serviceCenter.getIncome()*tax) {
+            serviceCenter.setIncome(serviceCenter.getIncome() - serviceCenter.getIncome()*tax);
             return true;
         }
         return false;

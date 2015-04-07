@@ -2,19 +2,17 @@ package newStack;
 
 
 
-public interface IStack {
+public interface IStack<T> extends Iterable<T> {
 
-    Object pop();
+    T pop();
 
-    boolean push(Object o);
+    boolean push(T o);
 
     int size();
 
-    Object peek();
+    T peek();
 
     boolean empty();
 
-    int search(Object o);
-
-    void ensureCapacity(int minCapacity);
+    int search(T o);
 }

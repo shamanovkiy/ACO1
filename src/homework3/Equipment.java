@@ -22,10 +22,8 @@ public class Equipment {
     }
 
 
-    public Equipment(String model, double price, boolean condition) {
+    public Equipment(String model) {
         this.model = model;
-        this.price = price;
-        this.condition = condition;
     }
 
     @Override

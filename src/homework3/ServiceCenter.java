@@ -4,24 +4,33 @@ package homework3;
 import homework1.Address;
 
 
+
 public class ServiceCenter {
 
     private Address address;
     private EmployeeSC[] employees;
     private int index;
-    private double income;
+    private double income = 10000;
     private String name;
-    private Client[] clients;
-    private Equipment[] equipments;
+    private Client[] clients = new Client[20];
+    private Equipment[] equipments = new Equipment[20];
     private int indexClient;
+    private Repairman repairman;
+
+    public void giveToRepair(String model, Repairman repairman){
+        for (int i = 0; i < indexClient; i++) {
+            if(equipments[i].getModel().equalsIgnoreCase(model))
+                repairman.takeEquipment(equipments[i]);
+        }
+    }
 
     public Client[] getClients() {
         return clients;
     }
 
-    public boolean giveToClient(Client client){
+    public boolean giveToClient(String nameClient){
         for (int i = 0; i < indexClient; i++) {
-            if(clients[i].equals(client) && equipments[i].isCondition()){
+            if(clients[i].equals(nameClient) && equipments[i].isCondition()){
                 clients[i].takeEquipment(equipments[i]);
                 indexClient--;
                 return true;
@@ -104,16 +113,15 @@ public class ServiceCenter {
 
     public boolean addEmployee(EmployeeSC employee) {
         if (index >= employees.length) {
-            return false;
+            System.out.println("We cant add new employee");
         }
-        employees[index] = employee;
-        index++;
+        employees[index++] = employee;
         return true;
     }
 
-    public boolean fireEmployee(EmployeeSC employee) {
+    public boolean fireEmployee(String name) {
         for (int i = 0; i < index; i++) {
-            if (employees[i] == employee) {
+            if (employees[i].getName().equalsIgnoreCase(name)) {
                 employees[i] = null;
                 index--;
                 return true;
@@ -123,11 +131,8 @@ public class ServiceCenter {
     }
 
     public void showEmployees() {
-        if (index == employees.length) {
-            System.out.println("We can't add new employee");
-        }
         for (int i = 0; i < index; i++) {
-            employees[i].toString();
+            System.out.println(employees[i].toString());
         }
     }
 

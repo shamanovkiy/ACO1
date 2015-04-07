@@ -1,11 +1,12 @@
 package newStack;
 
 
-public class MyStack implements IStack{
+import java.util.Iterator;
 
+public class MyStack<T> implements IStack<T>{
     private static final int DEFAULT_SIZE = 16;
 
-    private Object[] elements;
+    private T[] elements;
     private int index;
 
     public MyStack() {
@@ -13,24 +14,25 @@ public class MyStack implements IStack{
     }
 
     public MyStack(int size) {
-        elements = new Object[size];
+        elements =(T[]) new Object[size];
     }
 
     @Override
-    public Object pop() {
+    public T pop() {
         if(index == 0) {
             return null;
         }
 
-        Object top = elements[--index];
+        T top = elements[--index];
         return top;
     }
 
     @Override
-    public boolean push(Object o) {
+    public boolean push(T o) {
         if(index >= elements.length) {
             return false;
         }
+        ensureCapacity();
         elements[index] = o;
         index++;
         return true;
@@ -42,7 +44,7 @@ public class MyStack implements IStack{
     }
 
     @Override
-    public Object peek() {
+    public T peek() {
         if(index == 0) {
             return null;
         }
@@ -55,12 +57,11 @@ public class MyStack implements IStack{
     }
 
     @Override
-    public int search(Object o) {
+    public int search(T o) {
         int temp = 0;
         if(index == 0){
             temp = -1;
         }
-
         for(int i = index; i > 0; i--){
             if(elements[i] == o){
                 return i;
@@ -69,7 +70,36 @@ public class MyStack implements IStack{
         return temp;
     }
 
-    public void ensureCapacity(int minCapacity){
+    private void ensureCapacity(){
+        if(index == elements.length){
+            T[] newElements =(T[]) new Object[elements.length * 2];
+            for (int i = 0; i < elements.length; i++) {
+                newElements[i] = elements[i];
+                this.elements = newElements;
+            }
+        }
+    }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator<T>();
+    }
+
+    private class MyIterator<E> implements Iterator<E> {
+        int iteratorIndex = index - 1;
+
+        @Override
+        public boolean hasNext() {
+            if (iteratorIndex < 0) {
+                return false;
+            }
+            return elements[iteratorIndex] != null;
+        }
+
+
+        @Override
+        public E next() {
+            return (E) elements[iteratorIndex--];
+        }
     }
 }

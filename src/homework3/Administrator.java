@@ -20,12 +20,16 @@ public class Administrator extends EmployeeSC{
         serviceCenter.showClients();
     }
 
-    public void giveToRepair(Equipment equipment, Repairman repairman){
-        repairman.takeEquipment(equipment);
+    public void takeEquipment(Client client, Equipment equipment){
+        serviceCenter.addClient(client, equipment);
     }
 
-    public void giveToClient(Client client){
-        serviceCenter.giveToClient(client);
+    public void giveToRepair(String model, Repairman repairman){
+        serviceCenter.giveToRepair(model, repairman);
+    }
+
+    public void giveToClient(String nameClient){
+        serviceCenter.giveToClient(nameClient);
     }
 
 }

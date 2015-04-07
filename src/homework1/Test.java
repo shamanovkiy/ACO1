@@ -15,7 +15,6 @@ public class Test {
         company.setName("Apple");
 
         Address adrsCompany = new Address();
-        adrsCompany.setCountry("Ukraine");
         adrsCompany.setCity("Kyiv");
         adrsCompany.setStreet("Kreshchatyk");
         adrsCompany.setBuilding("2a");
