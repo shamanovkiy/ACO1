@@ -11,15 +11,14 @@ public class Structure {
 
     public static void seeStructure(String path){
         File file = new File(path);
-        String[] files = file.list();
-        for(String f : files){
+        File[] files = file.listFiles();
+        for(File f : files){
             if(files == null){
                 return;
             }
-            System.out.println(path + "\\" + f);
-            File newF = new File(path + "\\" + f);
-            if(newF.isDirectory()){
-                seeStructure(newF.getPath());
+            System.out.println(f);
+            if(f.isDirectory()){
+                seeStructure(f.getPath());
             }
         }
     }

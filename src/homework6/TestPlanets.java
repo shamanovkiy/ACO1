@@ -20,11 +20,7 @@ public class TestPlanets {
                 if(chose1 == 1){
                     System.out.println("Enter please name of planet");
                     String name = sc.next();
-                    for (int i = 0; i < 8; i++) {
-                        if (Planets.values()[i].getName().equalsIgnoreCase(name)) {
-                            System.out.println(Planets.values()[i]);
-                        }
-                    }
+                    System.out.println(Planets.valueOf(name));
                 }
                 else if(chose1 == 2){
                     System.out.println("Enter please number of planet");
@@ -33,12 +29,7 @@ public class TestPlanets {
                         System.out.println("Wrong number");
                     }
                     else {
-                        for (int i = 0; i < 8; i++) {
-                            if (Planets.values()[i].getNumber() == number) {
-                                System.out.println(Planets.values()[i]);
-                            }
-
-                        }
+                        System.out.println(Planets.values()[number-1]);
                     }
                 }
                 else if(chose1 == 3){

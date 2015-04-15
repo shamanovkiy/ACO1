@@ -1,6 +1,7 @@
 package newStack;
 
 import newStack.IStack;
+
 import java.util.EmptyStackException;
 import java.util.Iterator;
 
@@ -12,10 +13,10 @@ public class MyLinkedStack<T> implements IStack<T> {
 
     @Override
     public T pop() {
-        if(size == 0){
+        if (size == 0) {
             throw new EmptyStackException();
         }
-        T temp =(T) top.value;
+        T temp = (T) top.value;
         top = top.next;
         size--;
         return temp;
@@ -41,7 +42,7 @@ public class MyLinkedStack<T> implements IStack<T> {
 
     @Override
     public boolean empty() {
-        if(size == 0){
+        if (size == 0) {
             return true;
         }
         return false;
@@ -58,7 +59,6 @@ public class MyLinkedStack<T> implements IStack<T> {
     }
 
     private class MyIterator<E> implements Iterator<E> {
-        int iteratorIndex = size;
 
         @Override
         public boolean hasNext() {
@@ -72,11 +72,11 @@ public class MyLinkedStack<T> implements IStack<T> {
         }
     }
 
-    private static class Node<T>{
+    private static class Node<T> {
         T value;
         Node next;
 
-        public Node(T value, Node next){
+        public Node(T value, Node next) {
             this.value = value;
             this.next = next;
         }
