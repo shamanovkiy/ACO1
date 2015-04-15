@@ -16,12 +16,11 @@ public class TicTacToe extends JFrame {
     private JButton b7;
     private JButton b8;
     private JButton b9;
-    public static TicTacToe TicTacToe = new TicTacToe();
 
     public TicTacToe(){
         super("Tic Tak Toe");
-        setVisible(true);
         setBounds(450, 200, 400, 400);
+        setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         init();
     }
@@ -212,10 +211,10 @@ public class TicTacToe extends JFrame {
         int newGame = JOptionPane.showOptionDialog(new JFrame(), "Player X won\n Congratulation!\n Do you want to start again?",
                 "PLAYER X WON!!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, null);
         if(newGame == 0){
-            TicTacToe.setVisible(false);
-            TicTacToe = new TicTacToe();
+            dispose();
+            new TicTacToe();
         }else{
-            TicTacToe.dispose();
+            dispose();
         }
     }
 
@@ -224,10 +223,10 @@ public class TicTacToe extends JFrame {
         int newGameC = JOptionPane.showOptionDialog(new JFrame(), "Player O won\n Congratulation!\n Do you want to start again?",
                 "PLAYER O WON!!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, null);
         if(newGameC == 0){
-            TicTacToe.setVisible(false);
-            TicTacToe = new TicTacToe();
+            dispose();
+            new TicTacToe();
         }else{
-            TicTacToe.dispose();
+            dispose();
         }
     }
 
@@ -238,10 +237,10 @@ public class TicTacToe extends JFrame {
         int newGameC = JOptionPane.showOptionDialog(new JFrame(), "Draw\n Do you want to start again?",
                 "Draw", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, null);
         if(newGameC == 0){
-            TicTacToe.setVisible(false);
-            TicTacToe = new TicTacToe();
+            dispose();
+            new TicTacToe();
         }else{
-            TicTacToe.dispose();
+            dispose();
         }
     }
 
@@ -387,7 +386,7 @@ public class TicTacToe extends JFrame {
         }
 
         if(!b1.isEnabled()&& !b2.isEnabled()&& !b3.isEnabled()&& !b4.isEnabled()&& !b5.isEnabled()&&
-           !b6.isEnabled()&& !b7.isEnabled()&& !b8.isEnabled()&& !b9.isEnabled()) {
+                !b6.isEnabled()&& !b7.isEnabled()&& !b8.isEnabled()&& !b9.isEnabled()) {
             draw();
         }
 

@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 public class TestTicTacToe {
 
     public static void main(String[] args) {
-        TicTacToe.TicTacToe.setVisible(false);
+        final TicTacToe ticTacToe = new TicTacToe();
+        ticTacToe.setVisible(false);
         final JFrame chose = new JFrame();
         chose.setVisible(true);
         chose.setBounds(500, 300, 200, 100);
@@ -20,7 +21,7 @@ public class TestTicTacToe {
         c1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TicTacToe.TicTacToe.setVisible(true);
+                ticTacToe.setVisible(true);
                 chose.setVisible(false);
             }
         });
