@@ -8,10 +8,8 @@ import java.util.*;
 
 public class TicTacToeBot extends JFrame {
 
-    public static final String O = "O";
-    public static final String X = "X";
+    private static final String X = "X";
     private boolean playerWin = false;
-    private boolean computerWIn = false;
     private int step = 1;
     private JButton b1;
     private JButton b2;
@@ -81,201 +79,108 @@ public class TicTacToeBot extends JFrame {
         });
     }
 
-    private void nextGame() {
+    /*
+
+    temp = 1 if player X won, -1 if computer won, 0 if draw;
+
+     */
+    private void nextGame(int temp){
         Object[] options = {"Yes", "No"};
-        int newGame = JOptionPane.showOptionDialog(new JFrame(), "Player X won\n Congratulation!\n Do you want to start again?",
-                "PLAYER X WON!!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, null);
-        if (newGame == 0) {
+        Object message;
+        if(temp == 1){
+            message = "Player X won\n Congratulation!\n Do you want to start again?";
+        }else if(temp == -1){
+            message = "Computer Won!\n Do you want to start again?";
+        }else{
+            message = "Draw\n Do you want to start again?";
+        }
+        int newGame = JOptionPane.showOptionDialog(new JFrame(), message,
+                "Game over", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+
+        if(newGame == 0){
             dispose();
             new TicTacToeBot();
-        } else {
+        }else{
             dispose();
             System.exit(-1);
         }
     }
 
-    private void nextGameC() {
-        Object[] options = {"Yes", "No"};
-        int newGameC = JOptionPane.showOptionDialog(new JFrame(), "Computer won\n Do you want to start again?",
-                "COMPUTER WON!!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, null);
-        if (newGameC == 0) {
-            dispose();
-            new TicTacToeBot();
-        } else {
-            dispose();
-            System.exit(-1);
-        }
-    }
+    private void checkToWin(){
 
-    private void draw() {
-        playerWin = false;
-        computerWIn = false;
-        Object[] options = {"Yes", "No"};
-        int newGameC = JOptionPane.showOptionDialog(new JFrame(), "Draw\n Do you want to start again?",
-                "Draw", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, null);
-        if (newGameC == 0) {
-            dispose();
-            new TicTacToeBot();
-        } else {
-            dispose();
-            System.exit(-1);
-        }
-    }
-
-    private void checkToWin() {
-
-        if (b1.getText().equals(X)) {
-            if (b4.getText().equals(X)) {
-                if (b7.getText().equals(X)) {
-                    playerWin = true;
-                    computerWIn = false;
-                    nextGame();
-                }
+        if(b1.getText().equals(b4.getText()) && b1.getText().equals(b7.getText()) && !b1.getText().equals("")){
+            playerWin = true;
+            if(b1.getText().equals(X)) {
+                nextGame(1);
+            }else{
+                nextGame(-1);
             }
         }
-        if (b1.getText().equals(X)) {
-            if (b2.getText().equals(X)) {
-                if (b3.getText().equals(X)) {
-                    playerWin = true;
-                    computerWIn = false;
-                    nextGame();
-                }
+        if(b1.getText().equals(b2.getText()) && b1.getText().equals(b3.getText()) && !b1.getText().equals("")){
+            playerWin = true;
+            if(b1.getText().equals(X)) {
+                nextGame(1);
+            }else{
+                nextGame(-1);
             }
         }
-        if (b1.getText().equals(X)) {
-            if (b5.getText().equals(X)) {
-                if (b9.getText().equals(X)) {
-                    playerWin = true;
-                    computerWIn = false;
-                    nextGame();
-                }
+        if(b1.getText().equals(b5.getText()) && b1.getText().equals(b9.getText()) && !b1.getText().equals("")){
+            playerWin = true;
+            if(b1.getText().equals(X)) {
+                nextGame(1);
+            }else{
+                nextGame(-1);
             }
         }
-        if (b2.getText().equals(X)) {
-            if (b5.getText().equals(X)) {
-                if (b8.getText().equals(X)) {
-                    playerWin = true;
-                    computerWIn = false;
-                    nextGame();
-                }
+        if(b2.getText().equals(b5.getText()) && b2.getText().equals(b8.getText()) && !b2.getText().equals("")){
+            playerWin = true;
+            if(b2.getText().equals(X)) {
+                nextGame(1);
+            }else{
+                nextGame(-1);
             }
         }
-        if (b3.getText().equals(X)) {
-            if (b6.getText().equals(X)) {
-                if (b9.getText().equals(X)) {
-                    playerWin = true;
-                    computerWIn = false;
-                    nextGame();
-                }
+        if(b3.getText().equals(b6.getText()) && b3.getText().equals(b9.getText()) && !b3.getText().equals("")){
+            playerWin = true;
+            if(b3.getText().equals(X)) {
+                nextGame(1);
+            }else{
+                nextGame(-1);
             }
         }
-        if (b3.getText().equals(X)) {
-            if (b5.getText().equals(X)) {
-                if (b7.getText().equals(X)) {
-                    playerWin = true;
-                    computerWIn = false;
-                    nextGame();
-                }
+        if(b3.getText().equals(b5.getText()) && b3.getText().equals(b7.getText()) && !b3.getText().equals("")){
+            playerWin = true;
+            if(b3.getText().equals(X)) {
+                nextGame(1);
+            }else{
+                nextGame(-1);
             }
         }
-        if (b4.getText().equals(X)) {
-            if (b5.getText().equals(X)) {
-                if (b6.getText().equals(X)) {
-                    playerWin = true;
-                    computerWIn = false;
-                    nextGame();
-                }
+        if(b4.getText().equals(b5.getText()) && b4.getText().equals(b6.getText()) && !b4.getText().equals("")){
+            playerWin = true;
+            if(b4.getText().equals(X)) {
+                nextGame(1);
+            }else{
+                nextGame(-1);
             }
         }
-        if (b7.getText().equals(X)) {
-            if (b8.getText().equals(X)) {
-                if (b9.getText().equals(X)) {
-                    playerWin = true;
-                    computerWIn = false;
-                    nextGame();
-                }
-            }
-        }
-        ///////////////////////////
-        if (b1.getText().equals(O)) {
-            if (b4.getText().equals(O)) {
-                if (b7.getText().equals(O)) {
-                    playerWin = false;
-                    computerWIn = true;
-                    nextGameC();
-                }
-            }
-        }
-        if (b1.getText().equals(O)) {
-            if (b2.getText().equals(O)) {
-                if (b3.getText().equals(O)) {
-                    playerWin = false;
-                    computerWIn = true;
-                    nextGameC();
-                }
-            }
-        }
-        if (b1.getText().equals(O)) {
-            if (b5.getText().equals(O)) {
-                if (b9.getText().equals(O)) {
-                    playerWin = false;
-                    computerWIn = true;
-                    nextGameC();
-                }
-            }
-        }
-        if (b2.getText().equals(O)) {
-            if (b5.getText().equals(O)) {
-                if (b8.getText().equals(O)) {
-                    playerWin = false;
-                    computerWIn = true;
-                    nextGameC();
-                }
-            }
-        }
-        if (b3.getText().equals(O)) {
-            if (b6.getText().equals(O)) {
-                if (b9.getText().equals(O)) {
-                    playerWin = false;
-                    computerWIn = true;
-                    nextGameC();
-                }
-            }
-        }
-        if (b3.getText().equals(O)) {
-            if (b5.getText().equals(O)) {
-                if (b7.getText().equals(O)) {
-                    playerWin = false;
-                    computerWIn = true;
-                    nextGameC();
-                }
-            }
-        }
-        if (b4.getText().equals(O)) {
-            if (b5.getText().equals(O)) {
-                if (b6.getText().equals(O)) {
-                    playerWin = false;
-                    computerWIn = true;
-                    nextGameC();
-                }
-            }
-        }
-        if (b7.getText().equals(O)) {
-            if (b8.getText().equals(O)) {
-                if (b9.getText().equals(O)) {
-                    playerWin = false;
-                    computerWIn = true;
-                    nextGameC();
-                }
+        if(b7.getText().equals(b8.getText()) && b7.getText().equals(b9.getText()) && !b7.getText().equals("")){
+            playerWin = true;
+            if(b7.getText().equals(X)) {
+                nextGame(1);
+            }else{
+                nextGame(-1);
             }
         }
 
-        if (!b1.isEnabled() && !b2.isEnabled() && !b3.isEnabled() && !b4.isEnabled() && !b5.isEnabled() &&
-                !b6.isEnabled() && !b7.isEnabled() && !b8.isEnabled() && !b9.isEnabled()) {
-            draw();
+
+        if(!b1.isEnabled()&& !b2.isEnabled()&& !b3.isEnabled()&& !b4.isEnabled()&& !b5.isEnabled()&&
+                !b6.isEnabled()&& !b7.isEnabled()&& !b8.isEnabled()&& !b9.isEnabled()) {
+            playerWin = false;
+            nextGame(0);
         }
 
-        if (playerWin || computerWIn) {
+        if(playerWin){
             b1.setEnabled(false);
             b2.setEnabled(false);
             b3.setEnabled(false);
@@ -286,15 +191,13 @@ public class TicTacToeBot extends JFrame {
             b8.setEnabled(false);
             b9.setEnabled(false);
         }
-
-
     }
 
     private void buttonForBot(JButton button) {
         if (button.isEnabled()) {
             if (button.getText().equals("")) {
                 button.setEnabled(false);
-                button.setText(O);
+                button.setText("O");
                 checkToWin();
                 step++;
             }
