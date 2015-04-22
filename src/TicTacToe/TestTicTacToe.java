@@ -8,32 +8,40 @@ import java.awt.event.ActionListener;
 public class TestTicTacToe {
 
     public static void main(String[] args) {
-        final JFrame chose = new JFrame();
-        chose.setVisible(true);
-        chose.setBounds(500, 300, 250, 100);
-        JPanel chosePanel = new JPanel(new GridLayout(1,2));
-        JButton c1 = new JButton("1 vs 1");
-        JButton c2 = new JButton("1 vs Computer");
-        chosePanel.add(c1);
-        chosePanel.add(c2);
-        chose.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        chose.getContentPane().add(chosePanel);
-        c1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                final TicTacToe ticTacToe = new TicTacToe();
-                ticTacToe.setVisible(true);
-                chose.setVisible(false);
-            }
+        new Game();
+    }
+
+    private static class Game extends JFrame{
+      private JButton humanOpponent = new JButton("1 vs 1");
+      private JButton botOpponent = new JButton("1 vs Computer");
+
+      private Game() {
+        setVisible(true);
+        setBounds(500, 300, 250, 100);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel(new GridLayout(1,2));
+        panel.add(humanOpponent);
+        panel.add(botOpponent);
+        getContentPane().add(panel);
+
+        humanOpponent.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            final TicTacToe ticTacToe = new TicTacToe();
+            ticTacToe.setVisible(true);
+            setVisible(false);
+          }
         });
-        c2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                final TicTacToeBot ticTacToeBot = new TicTacToeBot();
-                ticTacToeBot.setVisible(true);
-                chose.setVisible(false);
-            }
+        botOpponent.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            final TicTacToeBot ticTacToeBot = new TicTacToeBot();
+            ticTacToeBot.setVisible(true);
+            setVisible(false);
+          }
         });
+      }
     }
 
 }
