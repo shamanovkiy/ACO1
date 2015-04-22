@@ -10,7 +10,7 @@ public class TestTicTacToe {
     public static void main(String[] args) {
         final JFrame chose = new JFrame();
         chose.setVisible(true);
-        chose.setBounds(500, 300, 200, 100);
+        chose.setBounds(500, 300, 250, 100);
         JPanel chosePanel = new JPanel(new GridLayout(1,2));
         JButton c1 = new JButton("1 vs 1");
         JButton c2 = new JButton("1 vs Computer");
@@ -29,10 +29,11 @@ public class TestTicTacToe {
         c2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final TicTacToeBot ticTacToe = new TicTacToeBot();
-                ticTacToe.setVisible(true);
+                final TicTacToeBot ticTacToeBot = new TicTacToeBot();
+                ticTacToeBot.setVisible(true);
                 chose.setVisible(false);
             }
         });
     }
+
 }
