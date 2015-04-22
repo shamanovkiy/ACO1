@@ -30,7 +30,7 @@ public class TicTacToe extends JFrame {
     private void init(){
         initButton();
         JPanel field = new JPanel(new GridLayout(3,3));
-        field.setLayout(new GridLayout(3,3));
+        field.setLayout(new GridLayout(3, 3));
         field.add(b1);
         field.add(b2);
         field.add(b3);
@@ -45,161 +45,37 @@ public class TicTacToe extends JFrame {
 
     private void initButton(){
         b1 = new JButton("");
-        b1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                b1.setEnabled(false);
-                if(b1.getText().equals("")){
-                    if(playerTurn){
-                        b1.setText("X");
-                        checkToWin();
-                        playerTurn = false;
-                    }else{
-                        b1.setText("O");
-                        checkToWin();
-                        playerTurn = true;
-                    }
-                }
-            }
-        });
+        actionButton(b1);
         b2 = new JButton("");
-        b2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                b2.setEnabled(false);
-                if(b2.getText().equals("")){
-                    if(playerTurn){
-                        b2.setText("X");
-                        checkToWin();
-                        playerTurn = false;
-                    }else{
-                        b2.setText("O");
-                        checkToWin();
-                        playerTurn = true;
-                    }
-                }
-            }
-        });
+        actionButton(b2);
         b3 = new JButton("");
-        b3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                b3.setEnabled(false);
-                if(b3.getText().equals("")){
-                    if(playerTurn){
-                        b3.setText("X");
-                        checkToWin();
-                        playerTurn = false;
-                    }else{
-                        b3.setText("O");
-                        checkToWin();
-                        playerTurn = true;
-                    }
-                }
-            }
-        });
+        actionButton(b3);
         b4 = new JButton("");
-        b4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                b4.setEnabled(false);
-                if(b4.getText().equals("")){
-                    if(playerTurn){
-                        b4.setText("X");
-                        checkToWin();
-                        playerTurn = false;
-                    }else{
-                        b4.setText("O");
-                        checkToWin();
-                        playerTurn = true;
-                    }
-                }
-            }
-        });
+        actionButton(b4);
         b5 = new JButton("");
-        b5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                b5.setEnabled(false);
-                if(b5.getText().equals("")){
-                    if(playerTurn){
-                        b5.setText("X");
-                        checkToWin();
-                        playerTurn = false;
-                    }else{
-                        b5.setText("O");
-                        checkToWin();
-                        playerTurn = true;
-                    }
-                }
-            }
-        });
+        actionButton(b5);
         b6 = new JButton("");
-        b6.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                b6.setEnabled(false);
-                if(b6.getText().equals("")){
-                    if(playerTurn){
-                        b6.setText("X");
-                        checkToWin();
-                        playerTurn = false;
-                    }else{
-                        b6.setText("O");
-                        checkToWin();
-                        playerTurn = true;
-                    }
-                }
-            }
-        });
+        actionButton(b6);
         b7 = new JButton("");
-        b7.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                b7.setEnabled(false);
-                if(b7.getText().equals("")){
-                    if(playerTurn){
-                        b7.setText("X");
-                        checkToWin();
-                        playerTurn = false;
-                    }else{
-                        b7.setText("O");
-                        checkToWin();
-                        playerTurn = true;
-                    }
-                }
-            }
-        });
+        actionButton(b7);
         b8 = new JButton("");
-        b8.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                b8.setEnabled(false);
-                if(b8.getText().equals("")){
-                    if(playerTurn){
-                        b8.setText("X");
-                        checkToWin();
-                        playerTurn = false;
-                    }else{
-                        b8.setText("O");
-                        checkToWin();
-                        playerTurn = true;
-                    }
-                }
-            }
-        });
+        actionButton(b8);
         b9 = new JButton("");
-        b9.addActionListener(new ActionListener() {
+        actionButton(b9);
+    }
+
+    private void actionButton(final JButton button){
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                b9.setEnabled(false);
-                if(b9.getText().equals("")){
-                    if(playerTurn){
-                        b9.setText("X");
+                button.setEnabled(false);
+                if (button.getText().equals("")) {
+                    if (playerTurn) {
+                        button.setText("X");
                         checkToWin();
                         playerTurn = false;
-                    }else{
-                        b9.setText("O");
+                    } else {
+                        button.setText("O");
                         checkToWin();
                         playerTurn = true;
                     }
@@ -217,6 +93,7 @@ public class TicTacToe extends JFrame {
             new TicTacToe();
         }else{
             dispose();
+            System.exit(-1);
         }
     }
 
@@ -229,6 +106,7 @@ public class TicTacToe extends JFrame {
             new TicTacToe();
         }else{
             dispose();
+            System.exit(-1);
         }
     }
 
@@ -243,6 +121,7 @@ public class TicTacToe extends JFrame {
             new TicTacToe();
         }else{
             dispose();
+            System.exit(-1);
         }
     }
 
