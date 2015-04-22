@@ -178,5 +178,10 @@ public class MyList<T> extends AbstractList<T> {
         public E next() {
             return (E) elements[iteratorIndex--];
         }
+
+      @Override
+      public void remove() {
+        throw new UnsupportedOperationException();
+      }
     }
 }

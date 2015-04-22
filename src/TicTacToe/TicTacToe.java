@@ -4,11 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TicTacToe extends JFrame {
-    private final static String X = "X";
-    private boolean playerWin = false;
-    private boolean playerTurn = true;
+  private final static String X = "X";
+  private static final String O = "O";
+  public static final String DRAW = "draw";
+  public static final String GAME_TITLE = "Tic Tak Toe";
+  private boolean playerWin = false;
+    private boolean xMove = true;
     private JButton b1;
     private JButton b2;
     private JButton b3;
@@ -18,17 +25,31 @@ public class TicTacToe extends JFrame {
     private JButton b7;
     private JButton b8;
     private JButton b9;
+    private Map<Integer, List<JButton>> winLines;
 
     public TicTacToe(){
-        super("Tic Tak Toe");
+        super(GAME_TITLE);
         setBounds(450, 200, 400, 400);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         init();
+        initWinLines();
     }
 
-    private void init(){
-        initButton();
+    private void initWinLines() {
+      winLines = new HashMap<Integer, List<JButton>>();
+      winLines.put(1, Arrays.asList(b1, b4, b7));
+      winLines.put(2, Arrays.asList(b2, b5, b8));
+      winLines.put(3, Arrays.asList(b3, b6, b9));
+      winLines.put(4, Arrays.asList(b1, b2, b3));
+      winLines.put(5, Arrays.asList(b4, b5, b6));
+      winLines.put(6, Arrays.asList(b7, b8, b7));
+      winLines.put(7, Arrays.asList(b1, b5, b9));
+      winLines.put(8, Arrays.asList(b7, b5, b3));
+    }
+
+  private void init(){
+        initButtons();
         JPanel field = new JPanel(new GridLayout(3,3));
         field.setLayout(new GridLayout(3, 3));
         field.add(b1);
@@ -43,66 +64,59 @@ public class TicTacToe extends JFrame {
         getContentPane().add(field, BorderLayout.CENTER);
     }
 
-    private void initButton(){
-        b1 = new JButton("");
-        actionButton(b1);
-        b2 = new JButton("");
-        actionButton(b2);
-        b3 = new JButton("");
-        actionButton(b3);
-        b4 = new JButton("");
-        actionButton(b4);
-        b5 = new JButton("");
-        actionButton(b5);
-        b6 = new JButton("");
-        actionButton(b6);
-        b7 = new JButton("");
-        actionButton(b7);
-        b8 = new JButton("");
-        actionButton(b8);
-        b9 = new JButton("");
-        actionButton(b9);
+    private void initButtons(){
+        b1 = new JButton();
+        addListener(b1);
+        b2 = new JButton();
+        addListener(b2);
+        b3 = new JButton();
+        addListener(b3);
+        b4 = new JButton();
+        addListener(b4);
+        b5 = new JButton();
+        addListener(b5);
+        b6 = new JButton();
+        addListener(b6);
+        b7 = new JButton();
+        addListener(b7);
+        b8 = new JButton();
+        addListener(b8);
+        b9 = new JButton();
+        addListener(b9);
     }
 
-    private void actionButton(final JButton button){
+    private void addListener(final JButton button){
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 button.setEnabled(false);
-                if (button.getText().equals("")) {
-                    if (playerTurn) {
+                if (button.getText().isEmpty()) {
+                    if (xMove) {
                         button.setText(X);
                         checkToWin();
-                        playerTurn = false;
+                        xMove = false;
                     } else {
-                        button.setText("O");
+                        button.setText(O);
                         checkToWin();
-                        playerTurn = true;
+                        xMove = true;
                     }
                 }
             }
         });
     }
 
-/*
-
-temp = 1 if player X won, -1 if player O won, 0 if draw;
-
- */
-    private void nextGame(int temp){
-        Object[] options = {"Yes", "No"};
-        Object message;
-        if(temp == 1){
-            message = "Player X won\n Congratulation!\n Do you want to start again?";
-        }else if(temp == -1){
-            message = "Player O won\n Congratulation!\n Do you want to start again?";
-        }else{
-           message = "Draw\n Do you want to start again?";
+    private void finishGame(String winner){
+        String[] options = {"Yes", "No"};
+        String message;
+        if(DRAW.equals(winner)){
+          message = "Draw\nDo you want to start again?";
+        } else {
+          message = String.format("Player %s won\nCongratulation!\nDo you want to start again?", winner);
         }
-        int newGame = JOptionPane.showOptionDialog(new JFrame(), message,
+        int option = JOptionPane.showOptionDialog(new JFrame(), message,
                 "Game over", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, null);
 
-        if(newGame == 0){
+        if(option == JOptionPane.YES_NO_OPTION){
             dispose();
             new TicTacToe();
         }else{
@@ -112,77 +126,41 @@ temp = 1 if player X won, -1 if player O won, 0 if draw;
     }
 
     private void checkToWin(){
-
-        if(b1.getText().equals(b4.getText()) && b1.getText().equals(b7.getText()) && !b1.getText().equals("")){
+        if(isLineWin(1)){
             playerWin = true;
-            if(b1.getText().equals(X)) {
-                nextGame(1);
-            }else{
-                nextGame(-1);
-            }
-        }
-        if(b1.getText().equals(b2.getText()) && b1.getText().equals(b3.getText()) && !b1.getText().equals("")){
+            String winner = winLines.get(1).get(0).getText().equals(X) ? X : O;
+            finishGame(winner);
+        } else if(isLineWin(2)){
             playerWin = true;
-            if(b1.getText().equals(X)) {
-                nextGame(1);
-            }else{
-                nextGame(-1);
-            }
-        }
-        if(b1.getText().equals(b5.getText()) && b1.getText().equals(b9.getText()) && !b1.getText().equals("")){
+            String winner = winLines.get(2).get(0).getText().equals(X) ? X : O;
+            finishGame(winner);
+        } else if(isLineWin(3)){
             playerWin = true;
-            if(b1.getText().equals(X)) {
-                nextGame(1);
-            }else{
-                nextGame(-1);
-            }
-        }
-        if(b2.getText().equals(b5.getText()) && b2.getText().equals(b8.getText()) && !b2.getText().equals("")){
+            String winner = winLines.get(3).get(0).getText().equals(X) ? X : O;
+            finishGame(winner);
+        } else if(isLineWin(4)){
             playerWin = true;
-            if(b2.getText().equals(X)) {
-                nextGame(1);
-            }else{
-                nextGame(-1);
-            }
-        }
-        if(b3.getText().equals(b6.getText()) && b3.getText().equals(b9.getText()) && !b3.getText().equals("")){
+            String winner = winLines.get(4).get(0).getText().equals(X) ? X : O;
+            finishGame(winner);
+        } else if(isLineWin(5)){
             playerWin = true;
-            if(b3.getText().equals(X)) {
-                nextGame(1);
-            }else{
-                nextGame(-1);
-            }
-        }
-        if(b3.getText().equals(b5.getText()) && b3.getText().equals(b7.getText()) && !b3.getText().equals("")){
+            String winner = winLines.get(5).get(0).getText().equals(X) ? X : O;
+            finishGame(winner);
+        } else if(isLineWin(6)){
             playerWin = true;
-            if(b3.getText().equals(X)) {
-                nextGame(1);
-            }else{
-                nextGame(-1);
-            }
-        }
-        if(b4.getText().equals(b5.getText()) && b4.getText().equals(b6.getText()) && !b4.getText().equals("")){
+            String winner = winLines.get(6).get(0).getText().equals(X) ? X : O;
+            finishGame(winner);
+        } else if(isLineWin(7)){
             playerWin = true;
-            if(b4.getText().equals(X)) {
-                nextGame(1);
-            }else{
-                nextGame(-1);
-            }
-        }
-        if(b7.getText().equals(b8.getText()) && b7.getText().equals(b9.getText()) && !b7.getText().equals("")){
+            String winner = winLines.get(7).get(0).getText().equals(X) ? X : O;
+            finishGame(winner);
+        } else if(isLineWin(8)){
             playerWin = true;
-            if(b7.getText().equals(X)) {
-                nextGame(1);
-            }else{
-                nextGame(-1);
-            }
-        }
-
-
-        if(!b1.isEnabled()&& !b2.isEnabled()&& !b3.isEnabled()&& !b4.isEnabled()&& !b5.isEnabled()&&
+            String winner = winLines.get(8).get(0).getText().equals(X) ? X : O;
+            finishGame(winner);
+        } else if(!b1.isEnabled()&& !b2.isEnabled()&& !b3.isEnabled()&& !b4.isEnabled()&& !b5.isEnabled()&&
                 !b6.isEnabled()&& !b7.isEnabled()&& !b8.isEnabled()&& !b9.isEnabled()) {
-            playerWin = false;
-            nextGame(0);
+            finishGame(DRAW);
         }
 
         if(playerWin){
@@ -196,7 +174,11 @@ temp = 1 if player X won, -1 if player O won, 0 if draw;
             b8.setEnabled(false);
             b9.setEnabled(false);
         }
+    }
 
-
+    private boolean isLineWin(int lineNumber) {
+      List<JButton> line = winLines.get(lineNumber);
+      return !line.get(0).getText().isEmpty() && line.get(0).getText().equals(line.get(1).getText())
+        && line.get(0).getText().equals(line.get(2).getText());
     }
 }

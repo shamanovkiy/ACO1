@@ -101,5 +101,10 @@ public class MyStack<T> implements IStack<T>{
         public E next() {
             return (E) elements[iteratorIndex--];
         }
+
+      @Override
+      public void remove() {
+        throw new UnsupportedOperationException();
+      }
     }
 }

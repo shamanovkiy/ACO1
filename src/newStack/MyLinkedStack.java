@@ -70,6 +70,11 @@ public class MyLinkedStack<T> implements IStack<T> {
         public E next() {
             return (E) top;
         }
+
+      @Override
+      public void remove() {
+        throw new UnsupportedOperationException();
+      }
     }
 
     private static class Node<T> {
